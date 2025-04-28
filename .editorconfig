@@ -1,0 +1,73 @@
+# Indica que esto es la configuración raíz
+root = true
+
+# Archivos que se aplican
+[*.cs]
+
+####################
+# Estilo general
+####################
+
+# Tamaño de tabulación
+indent_style = space
+indent_size = 2
+
+# Charset
+charset = utf-8-bom
+
+# Saltos de línea
+end_of_line = lf
+insert_final_newline = true
+
+# Longitud máxima de línea
+max_line_length = 120
+
+####################
+# C# Specific Rules
+####################
+
+# Usar var si el tipo es evidente
+dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion
+dotnet_style_predefined_type_for_member_access = true:suggestion
+
+# Usar expresiones de cuerpo cuando es corto
+csharp_style_expression_bodied_methods = true:suggestion
+csharp_style_expression_bodied_properties = true:suggestion
+
+# Usar using internos
+csharp_using_directive_placement = inside_namespace:warning
+
+# Preferir interpolación de strings
+csharp_style_prefer_interpolated_string = true:suggestion
+
+# Preferir patrones sobre if tradicionales
+csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
+csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
+
+# Prefiere new() para inicializaciones
+csharp_style_prefer_simple_default_expression = true:suggestion
+csharp_style_prefer_compound_assignment = true:suggestion
+
+####################
+# Naming Conventions
+####################
+
+# Campos privados en _camelCase
+dotnet_naming_rule.private_fields_should_be_camel_case.severity = suggestion
+dotnet_naming_rule.private_fields_should_be_camel_case.symbols = private_fields
+dotnet_naming_rule.private_fields_should_be_camel_case.style = camel_case_prefix_underscore
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_symbols.private_fields.required_modifiers = readonly
+
+dotnet_naming_style.camel_case_prefix_underscore.capitalization = camel_case
+dotnet_naming_style.camel_case_prefix_underscore.required_prefix = _
+
+####################
+# Organizar using
+####################
+
+# Eliminar using innecesarios
+dotnet_separate_import_directive_groups = true
+dotnet_sort_system_directives_first = true

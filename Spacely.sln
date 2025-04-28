@@ -5,11 +5,13 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{0FC8F87F-AAA0-4E00-8962-985B80D816E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacely.CLI", "apps\Spacely.CLI\Spacely.CLI.csproj", "{41BCDA1D-5ED6-46FD-AA84-0F1AB25FE774}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLI", "apps\CLI\CLI.csproj", "{41BCDA1D-5ED6-46FD-AA84-0F1AB25FE774}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3C4FBDC1-F2EA-4BD7-8B41-4A66189DDD06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spacely.ReservationSystem", "src\Spacely.ReservationSystem\Spacely.ReservationSystem.csproj", "{02CD885D-69D7-4449-84B9-2EBAE8C577F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationSystem", "src\ReservationSystem\ReservationSystem.csproj", "{02CD885D-69D7-4449-84B9-2EBAE8C577F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Shared\Shared.csproj", "{63D93BF2-D44B-4C29-80DF-58CC937DBEE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,9 +30,14 @@ Global
 		{02CD885D-69D7-4449-84B9-2EBAE8C577F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02CD885D-69D7-4449-84B9-2EBAE8C577F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02CD885D-69D7-4449-84B9-2EBAE8C577F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63D93BF2-D44B-4C29-80DF-58CC937DBEE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63D93BF2-D44B-4C29-80DF-58CC937DBEE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63D93BF2-D44B-4C29-80DF-58CC937DBEE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63D93BF2-D44B-4C29-80DF-58CC937DBEE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{41BCDA1D-5ED6-46FD-AA84-0F1AB25FE774} = {0FC8F87F-AAA0-4E00-8962-985B80D816E0}
 		{02CD885D-69D7-4449-84B9-2EBAE8C577F1} = {3C4FBDC1-F2EA-4BD7-8B41-4A66189DDD06}
+		{63D93BF2-D44B-4C29-80DF-58CC937DBEE0} = {3C4FBDC1-F2EA-4BD7-8B41-4A66189DDD06}
 	EndGlobalSection
 EndGlobal

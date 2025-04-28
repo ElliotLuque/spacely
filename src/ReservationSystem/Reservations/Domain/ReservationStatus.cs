@@ -1,7 +1,7 @@
-﻿using Spacely.ReservationSystem.Shared.Domain.ValueObject;
-
-namespace Spacely.ReservationSystem.Reservations.Domain
+﻿namespace ReservationSystem.Reservations.Domain
 {
+  using Shared.Domain.ValueObject;
+
   public sealed class ReservationStatus : StringValueObject
   {
     public static readonly ReservationStatus Pending = new ReservationStatus(nameof(Pending));
@@ -10,8 +10,8 @@ namespace Spacely.ReservationSystem.Reservations.Domain
 
     private ReservationStatus(string value) : base(value) { }
 
-    public bool CanConfirm() => this == Pending;
+    public bool CanConfirm() => Equals(this, Pending);
 
-    public bool CanCancel() => this != Canceled;
+    public bool CanCancel() => !Equals(this, Canceled);
   }
 }

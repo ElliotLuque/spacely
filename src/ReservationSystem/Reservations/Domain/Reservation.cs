@@ -1,4 +1,4 @@
-﻿namespace Spacely.ReservationSystem.Reservations.Domain
+﻿namespace ReservationSystem.Reservations.Domain
 {
   public class Reservation
   {

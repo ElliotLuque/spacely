@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Spacely.ReservationSystem\Spacely.ReservationSystem.csproj" />
+    <ProjectReference Include="..\..\src\ReservationSystem\ReservationSystem.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

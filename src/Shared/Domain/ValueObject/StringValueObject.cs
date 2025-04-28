@@ -1,4 +1,4 @@
-﻿namespace Spacely.ReservationSystem.Shared
+﻿namespace Shared.Domain.ValueObject
 {
   public abstract class StringValueObject
   {

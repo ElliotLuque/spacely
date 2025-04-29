@@ -1,6 +1,8 @@
 ﻿namespace ReservationSystem.Reservations.Domain
 {
-  public class Reservation
+  using Shared.Domain;
+
+  public class Reservation : AggregateRoot
   {
     public Guid Id { get; private set; }
     public Guid UserId { get; private set; }

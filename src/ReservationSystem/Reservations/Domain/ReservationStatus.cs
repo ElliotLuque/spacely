@@ -13,5 +13,7 @@
     public bool CanConfirm() => Equals(this, Pending);
 
     public bool CanCancel() => !Equals(this, Canceled);
+    
+    public bool CanReschedule() => Equals(this, Canceled);
   }
 }

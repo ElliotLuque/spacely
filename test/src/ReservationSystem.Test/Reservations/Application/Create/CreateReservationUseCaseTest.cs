@@ -1,6 +1,5 @@
 ﻿using ReservationSystem.Reservations.Application.Create;
 using ReservationSystem.Reservations.Domain;
-using ReservationSystem.Reservations.Infrastructure;
 using ReservationSystem.Spaces.Domain;
 using ReservationSystem.Users.Domain;
 
@@ -12,8 +11,7 @@ public class CreateReservationUseCaseTest
   public async Task ShouldCreateReservation()
   {
     // Given
-    var reservationRepository = new InMemoryReservationRepository();
-    
+    var reservationId = new ReservationId(Guid.NewGuid());
     var userId = new UserId(Guid.NewGuid());
     var spaceId = new SpaceId(Guid.NewGuid());
 
@@ -27,14 +25,16 @@ public class CreateReservationUseCaseTest
       .Setup(repo => repo.FindByIdAsync(It.IsAny<SpaceId>()))
       .ReturnsAsync(new Space(spaceId, new SpaceName("Mock space"), new SpaceDescription("Mock space description"), true));
 
+    var reservationRepoMock = new Mock<IReservationRepository>();
+
     var useCase = new CreateReservationUseCase(
-      reservationRepository,
+      reservationRepoMock.Object,
       userRepoMock.Object,
       spaceRepoMock.Object
     );
 
     var command = new CreateReservationCommand(
-      ReservationId: Guid.NewGuid(),
+      ReservationId: reservationId.Value,
       UserId: userId.Value,
       SpaceId: spaceId.Value,
       StartDate: DateTime.UtcNow.AddDays(1), 
@@ -49,14 +49,18 @@ public class CreateReservationUseCaseTest
     Assert.Equal(command.UserId, reservation.UserId.Value);
     Assert.Equal(command.SpaceId, reservation.SpaceId.Value);
     Assert.Equal(ReservationStatus.Pending, reservation.Status);
+    reservationRepoMock.Verify(
+      x => x.SaveAsync(It.Is<Reservation>(r => 
+        r.ReservationId.Value == reservationId.Value &&
+        r.Status == ReservationStatus.Pending)),
+      Times.Once
+    );
   }
   
   [Fact]
   public async Task ShouldErrorWhenUserNotFound()
   {
     // Given
-    var reservationRepository = new InMemoryReservationRepository();
-    
     var reservationId = new ReservationId(Guid.NewGuid());
     var userId = new UserId(Guid.NewGuid());
     var spaceId = new SpaceId(Guid.NewGuid());
@@ -70,9 +74,11 @@ public class CreateReservationUseCaseTest
     spaceRepoMock
       .Setup(repo => repo.FindByIdAsync(It.IsAny<SpaceId>()))
       .ReturnsAsync(new Space(spaceId, new SpaceName("Mock space"), new SpaceDescription("Mock space description"), true));
+    
+    var reservationRepoMock = new Mock<IReservationRepository>();
 
     var useCase = new CreateReservationUseCase(
-      reservationRepository,
+      reservationRepoMock.Object,
       userRepoMock.Object,
       spaceRepoMock.Object
     );
@@ -86,16 +92,18 @@ public class CreateReservationUseCaseTest
     );
     
     // When & Then
-    var result = await Assert.ThrowsAsync<ArgumentException>(() => useCase.Execute(command));
-    Assert.Equal("User not found", result.Message);
+    var exception = await Assert.ThrowsAsync<ArgumentException>(() => useCase.Execute(command));
+    Assert.Equal("User not found", exception.Message);
+    reservationRepoMock.Verify(
+      x => x.SaveAsync(It.IsAny<Reservation>()),
+      Times.Never
+    );
   }
   
   [Fact]
   public async Task ShouldErrorWhenSpaceNotFound()
   {
     // Given
-    var reservationRepository = new InMemoryReservationRepository();
-    
     var reservationId = new ReservationId(Guid.NewGuid());
     var userId = new UserId(Guid.NewGuid());
     var spaceId = new SpaceId(Guid.NewGuid());
@@ -109,9 +117,11 @@ public class CreateReservationUseCaseTest
     spaceRepoMock
       .Setup(repo => repo.FindByIdAsync(It.IsAny<SpaceId>()))
       .ReturnsAsync((Space?)null);
+    
+    var reservationRepoMock = new Mock<IReservationRepository>();
 
     var useCase = new CreateReservationUseCase(
-      reservationRepository,
+      reservationRepoMock.Object,
       userRepoMock.Object,
       spaceRepoMock.Object
     );
@@ -125,7 +135,11 @@ public class CreateReservationUseCaseTest
     );
     
     // When & Then
-    var result = await Assert.ThrowsAsync<ArgumentException>(() => useCase.Execute(command));
-    Assert.Equal("Space not found", result.Message);
+    var exception = await Assert.ThrowsAsync<ArgumentException>(() => useCase.Execute(command));
+    Assert.Equal("Space not found", exception.Message);
+    reservationRepoMock.Verify(
+      x => x.SaveAsync(It.IsAny<Reservation>()),
+      Times.Never
+    );
   }
 }

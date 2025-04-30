@@ -6,7 +6,7 @@
 
   public class Reservation: AggregateRoot
   {
-    public ReservationId ReservationId { get; private set; }
+    public  ReservationId ReservationId { get; private set; }
     public UserId UserId { get; private set; } 
     public SpaceId SpaceId { get; private set; }
     public ReservationDateRange DateRange { get; private set; }
@@ -23,7 +23,7 @@
 
     public void Cancel()
     {
-      if (!Status.CanCancel())
+      if (Equals(Status, ReservationStatus.Canceled))
         throw new InvalidOperationException("Reservation already canceled");
 
       Status = ReservationStatus.Canceled;
@@ -31,7 +31,7 @@
 
     public void Confirm()
     {
-      if (!Status.CanConfirm())
+      if (!Equals(Status, ReservationStatus.Pending))
         throw new InvalidOperationException("Can't confirm this reservation");
 
       Status = ReservationStatus.Confirmed;
@@ -39,7 +39,7 @@
     
     public void Reschedule(ReservationDateRange newDateRange)
     {
-      if (!Status.CanReschedule())
+      if (Equals(Status, ReservationStatus.Canceled))
         throw new InvalidOperationException("Can't reschedule this reservation");
       
       DateRange = newDateRange;

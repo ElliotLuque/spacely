@@ -13,7 +13,7 @@ indent_style = space
 indent_size = 2
 
 # Charset
-charset = utf-8-bom
+charset = utf-8
 
 # Saltos de línea
 end_of_line = lf
@@ -37,16 +37,9 @@ csharp_style_expression_bodied_properties = true:suggestion
 # Usar using internos
 csharp_using_directive_placement = inside_namespace:warning
 
-# Preferir interpolación de strings
-csharp_style_prefer_interpolated_string = true:suggestion
-
 # Preferir patrones sobre if tradicionales
 csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
 csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
-
-# Prefiere new() para inicializaciones
-csharp_style_prefer_simple_default_expression = true:suggestion
-csharp_style_prefer_compound_assignment = true:suggestion
 
 ####################
 # Naming Conventions

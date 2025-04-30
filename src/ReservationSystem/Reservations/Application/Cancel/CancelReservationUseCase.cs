@@ -11,7 +11,7 @@ public class CancelReservationUseCase
     _reservationRepository = reservationRepository;
   }
 
-  public async Task ExecuteAsync(CancelReservationCommand command)
+  public async Task Execute(CancelReservationCommand command)
   {
     var reservation = await _reservationRepository.FindByIdAsync(new ReservationId(command.ReservationId));
     if (reservation is null)

@@ -2,10 +2,8 @@ namespace ReservationSystem.Test.Reservations.Application.Confirm;
 
 using ReservationSystem.Reservations.Application.Confirm;
 using ReservationSystem.Reservations.Domain;
-
-using Spaces.Domain;
-
-using Users.Domain;
+using ReservationSystem.Spaces.Domain;
+using ReservationSystem.Users.Domain;
 
 public class ConfirmReservationUseCaseTest
 {
@@ -46,7 +44,7 @@ public class ConfirmReservationUseCaseTest
       Times.Once
     );
   }
-  
+
   [Fact]
   public async Task ShouldNotConfirmReservation()
   {
@@ -105,6 +103,5 @@ public class ConfirmReservationUseCaseTest
     // When & Then
     var exception = await Assert.ThrowsAsync<ArgumentException>(() => useCase.Execute(command));
     Assert.Equal("Reservation not found", exception.Message);
-    
   }
 }

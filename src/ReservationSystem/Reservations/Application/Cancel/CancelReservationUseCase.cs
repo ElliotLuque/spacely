@@ -16,9 +16,9 @@ public class CancelReservationUseCase
     var reservation = await _reservationRepository.FindByIdAsync(new ReservationId(command.ReservationId));
     if (reservation is null)
       throw new ArgumentException("Reservation not found");
-    
+
     reservation.Cancel();
-    
+
     await _reservationRepository.SaveAsync(reservation);
   }
 }

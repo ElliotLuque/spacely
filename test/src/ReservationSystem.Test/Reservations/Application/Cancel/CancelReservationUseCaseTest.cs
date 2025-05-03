@@ -2,9 +2,8 @@
 
 using ReservationSystem.Reservations.Application.Cancel;
 using ReservationSystem.Reservations.Domain;
-using Spaces.Domain;
-
-using Users.Domain;
+using ReservationSystem.Spaces.Domain;
+using ReservationSystem.Users.Domain;
 
 public class CancelReservationUseCaseTest
 {
@@ -20,7 +19,7 @@ public class CancelReservationUseCaseTest
       new ReservationDateRange(DateTime.UtcNow.AddHours(1), DateTime.UtcNow.AddHours(2)),
       ReservationStatus.Pending
     );
-    
+
     var reservationRepoMock = new Mock<IReservationRepository>();
     reservationRepoMock
       .Setup(repo => repo.FindByIdAsync(It.IsAny<ReservationId>()))
@@ -31,9 +30,9 @@ public class CancelReservationUseCaseTest
     );
 
     var command = new CancelReservationCommand(
-     ReservationId: reservationId.Value
+      ReservationId: reservationId.Value
     );
-    
+
     // When
     await useCase.Execute(command);
 
@@ -44,7 +43,7 @@ public class CancelReservationUseCaseTest
       Times.Once
     );
   }
-  
+
   [Fact]
   public async Task ShouldNotCancelReservation()
   {
@@ -57,7 +56,7 @@ public class CancelReservationUseCaseTest
       new ReservationDateRange(DateTime.UtcNow.AddHours(1), DateTime.UtcNow.AddHours(2)),
       ReservationStatus.Canceled
     );
-    
+
     var reservationRepoMock = new Mock<IReservationRepository>();
     reservationRepoMock
       .Setup(repo => repo.FindByIdAsync(It.IsAny<ReservationId>()))
@@ -70,7 +69,7 @@ public class CancelReservationUseCaseTest
     var command = new CancelReservationCommand(
       ReservationId: reservationId.Value
     );
-    
+
     // When & Then
     var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => useCase.Execute(command));
     Assert.Equal("Reservation already canceled", exception.Message);
@@ -79,17 +78,17 @@ public class CancelReservationUseCaseTest
       Times.Never
     );
   }
-  
+
   [Fact]
   public async Task ShouldErrorWhenReservationNotFound()
   {
     // Given
     var reservationId = new ReservationId(Guid.NewGuid());
-    
+
     var reservationRepoMock = new Mock<IReservationRepository>();
     reservationRepoMock
       .Setup(repo => repo.FindByIdAsync(It.IsAny<ReservationId>()))
-      .ReturnsAsync((Reservation?) null);
+      .ReturnsAsync((Reservation?)null);
 
     var useCase = new CancelReservationUseCase(
       reservationRepoMock.Object
@@ -98,7 +97,7 @@ public class CancelReservationUseCaseTest
     var command = new CancelReservationCommand(
       ReservationId: reservationId.Value
     );
-    
+
     // When & Then
     var exception = await Assert.ThrowsAsync<ArgumentException>(() => useCase.Execute(command));
     Assert.Equal("Reservation not found", exception.Message);

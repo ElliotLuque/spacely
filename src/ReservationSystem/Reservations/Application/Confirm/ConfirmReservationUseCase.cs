@@ -16,7 +16,7 @@ public class ConfirmReservationUseCase
     var reservation = await _reservationRepository.FindByIdAsync(new ReservationId(command.ReservationId));
     if (reservation is null)
       throw new ArgumentException("Reservation not found");
-    
+
     reservation.Confirm();
 
     await _reservationRepository.SaveAsync(reservation);

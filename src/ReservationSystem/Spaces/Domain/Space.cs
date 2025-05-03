@@ -1,6 +1,6 @@
 ﻿namespace ReservationSystem.Spaces.Domain;
 
-using Shared.Domain;
+using SharedKernel.Domain;
 
 public class Space : AggregateRoot
 {
@@ -18,4 +18,6 @@ public class Space : AggregateRoot
   }
 
   public void ChangeName(SpaceName name) => Name = name;
+  public void ChangeDescription(SpaceDescription description) => Description = description;
+  public void Delete() => Active = false;
 }

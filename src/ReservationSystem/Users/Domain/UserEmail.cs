@@ -1,8 +1,8 @@
 ﻿namespace ReservationSystem.Users.Domain;
 
-using Shared.Domain.ValueObject;
+using SharedKernel.Domain.ValueObject;
 
-public sealed class UserEmail: StringValueObject
+public sealed class UserEmail : StringValueObject
 {
   public UserEmail(string value) : base(value)
   {

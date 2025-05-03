@@ -1,11 +1,11 @@
 ﻿namespace ReservationSystem.Spaces.Domain;
 
-using Shared.Domain.ValueObject;
+using SharedKernel.Domain.ValueObject;
 
 public sealed class SpaceDescription : StringValueObject
 {
   private const int MaxLength = 100;
-  
+
   public SpaceDescription(string value) : base(value)
   {
     if (value.Length > MaxLength)

@@ -2,8 +2,8 @@
 {
   public sealed class ReservationDateRange
   {
-    private DateTime Start { get; }
-    private DateTime End { get; }
+    public DateTime Start { get; }
+    public DateTime End { get; }
 
     public ReservationDateRange(DateTime start, DateTime end)
     {

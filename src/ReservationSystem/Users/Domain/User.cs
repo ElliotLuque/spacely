@@ -1,6 +1,6 @@
 ﻿namespace ReservationSystem.Users.Domain;
 
-using Shared.Domain;
+using SharedKernel.Domain;
 
 public class User : AggregateRoot
 {
@@ -14,6 +14,6 @@ public class User : AggregateRoot
     UserId = userId;
     Name = name;
     Email = email;
-    Active = active; 
+    Active = active;
   }
 }

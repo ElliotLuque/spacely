@@ -3,12 +3,13 @@
 using System.Collections.Concurrent;
 
 using Domain;
+
 using Spaces.Domain;
 
 public class InMemoryReservationRepository : IReservationRepository
 {
   private readonly ConcurrentDictionary<Guid, Reservation> _reservations = new();
-    
+
   public Task SaveAsync(Reservation reservation)
   {
     _reservations[reservation.ReservationId.Value] = reservation;
@@ -17,8 +18,8 @@ public class InMemoryReservationRepository : IReservationRepository
 
   public Task<Reservation?> FindByIdAsync(ReservationId reservationId)
   {
-     _reservations.TryGetValue(reservationId.Value, out var reservation);
-     return Task.FromResult(reservation);
+    _reservations.TryGetValue(reservationId.Value, out var reservation);
+    return Task.FromResult(reservation);
   }
 
   public Task<IEnumerable<Reservation>> FindBySpaceAsync(SpaceId spaceId)

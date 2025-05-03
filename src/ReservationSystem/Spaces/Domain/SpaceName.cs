@@ -1,6 +1,6 @@
 ﻿namespace ReservationSystem.Spaces.Domain;
 
-using Shared.Domain.ValueObject;
+using SharedKernel.Domain.ValueObject;
 
 public sealed class SpaceName : StringValueObject
 {

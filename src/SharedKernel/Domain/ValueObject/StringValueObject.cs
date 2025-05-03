@@ -1,8 +1,8 @@
-﻿namespace Shared.Domain.ValueObject
+﻿namespace SharedKernel.Domain.ValueObject
 {
   public abstract class StringValueObject(string value)
   {
-    private string Value { get; } = value;
+    public string Value { get; } = value;
 
     public override string ToString() => Value;
 

@@ -1,4 +1,4 @@
-﻿namespace Shared.Domain.ValueObject;
+﻿namespace SharedKernel.Domain.ValueObject;
 
 public abstract class UuidValueObject
 {
@@ -8,7 +8,7 @@ public abstract class UuidValueObject
   {
     if (value == Guid.Empty)
       throw new ArgumentException("UUID can't be empty");
-    
+
     Value = value;
   }
 
@@ -18,8 +18,8 @@ public abstract class UuidValueObject
       return false;
     return Value == other.Value;
   }
-  
+
   public override int GetHashCode() => Value.GetHashCode();
-  
+
   public override string ToString() => Value.ToString();
 }

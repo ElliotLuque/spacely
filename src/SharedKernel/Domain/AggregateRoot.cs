@@ -1,7 +1,6 @@
-﻿namespace Shared.Domain
+﻿namespace SharedKernel.Domain
 {
   public abstract class AggregateRoot
   {
-
   }
 }

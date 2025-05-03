@@ -14,7 +14,12 @@
     public ReservationDateRange DateRange { get; private set; }
     public ReservationStatus Status { get; private set; }
 
-    public Reservation(ReservationId reservationId, UserId userId, SpaceId spaceId, ReservationDateRange dateRange, ReservationStatus status)
+    private Reservation()
+    {
+    }
+
+    public Reservation(ReservationId reservationId, UserId userId, SpaceId spaceId, ReservationDateRange dateRange,
+      ReservationStatus status)
     {
       ReservationId = reservationId;
       UserId = userId;
